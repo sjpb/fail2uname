@@ -3,7 +3,7 @@
 
     NB: Requires sudo
     Usage:
-      python3 fail2uname.py
+      sudo ./fail2uname.py
 """
 
 
