@@ -36,7 +36,11 @@ def failed_logins():
     if line and not line.startswith('btmp'):
 
       #postgres ssh:notty    209.141.34.247   Fri Oct  1 07:15:43 2021 - Fri Oct  1 07:15:43 2021  (00:00)
-      user, _, address, wkday1, month1, day1, time1, year1, _, wkday2, month2, day2, time2, year2, tz = line.split()
+      try:
+        user, _, address, wkday1, month1, day1, time1, year1, _, wkday2, month2, day2, time2, year2, tz = line.split()
+      except ValueError:
+        _, address, wkday1, month1, day1, time1, year1, _, wkday2, month2, day2, time2, year2, tz = line.split()
+        user = ''
       startstr = '%02i-%s-%s %s' % (int(day1), month1, year1, time1)
       endstr = '%02i-%s-%s %s' % (int(day2), month2, year2, time2)
       startdt = datetime.datetime.strptime(startstr, "%d-%b-%Y %H:%M:%S")
